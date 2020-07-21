@@ -9,9 +9,14 @@ const HeaderBlock = styled.div`
 `;
 
 const HeaderTitle = styled.h3`
-    font-size: 24px;
+    font-size: 40px;
     color: #fff;
     margin: 0;
+    a:hover{
+        color: gray;
+        transition: 0.1s;
+    }
+    
 `;
 
 const HeaderLinks = styled.ul`
@@ -20,9 +25,14 @@ const HeaderLinks = styled.ul`
     align-items: center;
     color: #fff;
     list-style-type: none;
+
     li {
         margin-right: 20px;
-        font-size: 18px;
+        font-size: 24px;
+    }
+    li:hover{
+        color: gray;
+        transition: 0.1s;
     }
 `;
 
