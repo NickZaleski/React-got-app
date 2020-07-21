@@ -23,10 +23,9 @@ const RandomBlock = styled.div`
     }
 `
 
-
 export default class RandomChar extends Component {
 
-    constructor(props){
+    constructor(){
         super();
         this.updChar();
     }
@@ -46,8 +45,8 @@ export default class RandomChar extends Component {
     }
 
     updChar() {
-        const id = 13000; 
-        // const id = Math.floor(Math.random()*140 + 25); // from 25 to 140
+        // const id = 13000; 
+        const id = Math.floor(Math.random()*140 + 25); // from 25 to 140
         this.GotService.getCharacter(id)
         .then(this.onCharLoaded)
         .catch(this.onError)
@@ -66,7 +65,7 @@ export default class RandomChar extends Component {
 
         const errorMessage = error ? <ErrorMessage/> : null;
         const spinner = loading ? <Spinner/>  : null;
-        const content = !(loading || error) ? <View char={char}/> : null
+        const content = !(loading || error) ? <View char={char}/> : null;
 
         return (
             <RandomBlock>
