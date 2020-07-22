@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 // import './charDetails.css';
 import styled from 'styled-components';
-
+import gotService from '../../service/gotService';
 
 const CharDetail = styled.div`
     border-radius: 4px;
@@ -24,29 +24,70 @@ const SelectError = styled.div`
     font-size: 26px;
 `
 
+const SpanText = styled.div`
+    color: white;
+    font-size; 20px;    
+`
+
 export default class CharDetails extends Component {
 
+    gotService = new gotService();
+
+    state = {
+        char: null
+    }
+
+    componentDidMount(){
+        this.updateChar();
+    }
+
+    componentDidUpdate(prevProps){
+        if (this.props.charId !== prevProps.charId) {
+            this.updateChar();
+        }
+    }
+
+    updateChar() {
+        const {charId} = this.props;
+        if (!charId){
+            return;
+        }
+
+        this.gotService.getCharacter(charId)
+            .then((char) => {
+                this.setState({char});
+            })
+
+            this.foo.bar = 0;
+    }
 
     render() {
+
+        if (!this.state.char){
+            return <SpanText className="select-error">Please select a character</SpanText>
+        }
+
+        const {name, gender, born, died, culture} = this.state.char;
+
         return (
             <CharDetail>
-                <CharDerailH4>John Snow</CharDerailH4>
+                <CharDerailH4>{name}</CharDerailH4>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item d-flex justify-content-between">
                         <span className="term">Gender</span>
-                        <span>male</span>
+                        <span>{gender}</span>
                     </li>
                     <li className="list-group-item d-flex justify-content-between">
                         <span className="term">Born</span>
-                        <span>1783</span>
+                        <span>{born}</span>
                     </li>
                     <li className="list-group-item d-flex justify-content-between">
                         <span className="term">Died</span>
-                        <span>1820</span>
+                        <span>{died}</span>
                     </li>
                     <li className="list-group-item d-flex justify-content-between">
                         <span className="term">Culture</span>
-                        <span>First</span>
+                        <span>{culture}</span>
                     </li>
                 </ul>
             </CharDetail>

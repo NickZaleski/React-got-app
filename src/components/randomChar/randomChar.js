@@ -25,16 +25,27 @@ const RandomBlock = styled.div`
 
 export default class RandomChar extends Component {
 
-    constructor(){
-        super();
-        this.updChar();
-    }
+    
 
     GotService = new GotService();
     state = {
        char: {},
        loading: true
     }
+
+    componentDidMount(){
+        this.updChar();
+        this.timerId = setInterval(this.updChar, 1500);
+    }
+
+
+
+    componentWillUnmount(){
+        clearInterval(this.timerId);
+    }
+
+
+ 
 
     onCharLoaded = (char) => {
         this.setState({
@@ -44,7 +55,8 @@ export default class RandomChar extends Component {
         })
     }
 
-    updChar() {
+    updChar = () => {
+        
         // const id = 13000; 
         const id = Math.floor(Math.random()*140 + 25); // from 25 to 140
         this.GotService.getCharacter(id)
@@ -60,7 +72,7 @@ export default class RandomChar extends Component {
     }
 
     render() {
-        
+        console.log('render');
         const {char, loading, error} = this.state;
 
         const errorMessage = error ? <ErrorMessage/> : null;

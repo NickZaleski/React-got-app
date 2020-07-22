@@ -3,7 +3,14 @@ import styled from 'styled-components';
 import img from './error.jpg'
 
 const ErrorMessage = styled.div`
-   
+   h3{
+       margin: 20px auto;
+       padding: 20px;
+       background-color: white;
+       border-radius: 4px;
+       width: 500px;
+    
+   }
     font-size: 24px;
     color: darkred;
     margin: 0 auto;
