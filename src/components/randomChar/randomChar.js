@@ -28,14 +28,16 @@ export default class RandomChar extends Component {
     
 
     gotService = new gotService();
+
     state = {
        char: {},
-       loading: true
+       loading: true,
+       error: false
     }
 
     componentDidMount(){
-        this.updChar();
-        this.timerId = setInterval(this.updChar, 1500);
+        this.updateChar();
+        this.timerId = setInterval(this.updChar, 15000);
     }
 
 
@@ -55,16 +57,16 @@ export default class RandomChar extends Component {
         })
     }
 
-    updChar = () => {
+    updateChar = () => {
         
         // const id = 13000; 
         const id = Math.floor(Math.random()*140 + 25); // from 25 to 140
         this.gotService.getCharacter(id)
-        .then(this.onCharLoaded)
-        .catch(this.onError)
+            .then(this.onCharLoaded)
+            .catch(this.onError)
     }
 
-    onError = (error) => {
+    onError = (err) => {
         this.setState({
             error: true,
             loading: false

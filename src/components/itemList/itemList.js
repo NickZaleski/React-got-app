@@ -60,10 +60,9 @@ export default class ItemList extends Component {
 
         return (
             <ItemListGroup>
-                <ul
-                className = "item-list list-group">
+                
                 {items}
-                </ul>
+                
             </ItemListGroup>
         );
     }
