@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import styled from 'styled-components';
-import GotService from '../../service/gotService';
+import gotService from '../../service/gotService';
 import Spinner from '../spinner';
 import ErrorMessage from '../errorMessage';
 
@@ -27,7 +27,7 @@ export default class RandomChar extends Component {
 
     
 
-    GotService = new GotService();
+    gotService = new gotService();
     state = {
        char: {},
        loading: true
@@ -59,7 +59,7 @@ export default class RandomChar extends Component {
         
         // const id = 13000; 
         const id = Math.floor(Math.random()*140 + 25); // from 25 to 140
-        this.GotService.getCharacter(id)
+        this.gotService.getCharacter(id)
         .then(this.onCharLoaded)
         .catch(this.onError)
     }
